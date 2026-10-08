@@ -1,0 +1,58 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" width="100%" height="100%">
+  <defs>
+    <linearGradient id="bg-grad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#0f172a" />
+      <stop offset="50%" stop-color="#1e1b4b" />
+      <stop offset="100%" stop-color="#311042" />
+    </linearGradient>
+    <linearGradient id="baton-grad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#60a5fa" />
+      <stop offset="50%" stop-color="#c084fc" />
+      <stop offset="100%" stop-color="#f43f5e" />
+    </linearGradient>
+    <linearGradient id="arc-grad-1" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#38bdf8" stop-opacity="0.8" />
+      <stop offset="100%" stop-color="#818cf8" stop-opacity="0.2" />
+    </linearGradient>
+    <linearGradient id="arc-grad-2" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#c084fc" stop-opacity="0.8" />
+      <stop offset="100%" stop-color="#f472b6" stop-opacity="0.2" />
+    </linearGradient>
+    <filter id="glow" x="-20%" y="-20%" width="140%" height="140%">
+      <feGaussianBlur stdDeviation="6" result="blur" />
+      <feComposite in="SourceGraphic" in2="blur" operator="over" />
+    </filter>
+  </defs>
+
+  <!-- Background Card -->
+  <rect width="512" height="512" rx="110" fill="url(#bg-grad)" />
+
+  <!-- Harmonic Orchestration Waveform Rings -->
+  <circle cx="256" cy="256" r="190" fill="none" stroke="url(#arc-grad-1)" stroke-width="2" stroke-dasharray="8 12" />
+  <circle cx="256" cy="256" r="145" fill="none" stroke="url(#arc-grad-2)" stroke-width="3" stroke-dasharray="14 10" />
+  <circle cx="256" cy="256" r="100" fill="none" stroke="#a855f7" stroke-width="2" opacity="0.4" />
+
+  <!-- Conductor Baton Wave -->
+  <path d="M 120 370 Q 200 290 256 256 T 392 142" fill="none" stroke="url(#baton-grad)" stroke-width="12" stroke-linecap="round" filter="url(#glow)" />
+
+  <!-- Conductor Tip Sparkle / Pearl -->
+  <circle cx="392" cy="142" r="14" fill="#ffffff" filter="url(#glow)" />
+  <circle cx="392" cy="142" r="7" fill="#f43f5e" />
+
+  <!-- Subagent Node Constellations -->
+  <!-- Scout (Top Left) -->
+  <circle cx="160" cy="170" r="10" fill="#38bdf8" filter="url(#glow)" />
+  <line x1="160" y1="170" x2="256" y2="256" stroke="#38bdf8" stroke-width="2" stroke-opacity="0.4" stroke-dasharray="4 4" />
+
+  <!-- Worker (Bottom Right) -->
+  <circle cx="350" cy="350" r="10" fill="#a855f7" filter="url(#glow)" />
+  <line x1="350" y1="350" x2="256" y2="256" stroke="#a855f7" stroke-width="2" stroke-opacity="0.4" stroke-dasharray="4 4" />
+
+  <!-- Red Team (Bottom Left) -->
+  <circle cx="180" cy="340" r="10" fill="#f43f5e" filter="url(#glow)" />
+  <line x1="180" y1="340" x2="256" y2="256" stroke="#f43f5e" stroke-width="2" stroke-opacity="0.4" stroke-dasharray="4 4" />
+
+  <!-- Central Conductor Core -->
+  <circle cx="256" cy="256" r="18" fill="#1e1b4b" stroke="url(#baton-grad)" stroke-width="4" filter="url(#glow)" />
+  <circle cx="256" cy="256" r="6" fill="#ffffff" />
+</svg>

@@ -1,0 +1,27 @@
+# Byte-compiled / optimized / DLL files
+__pycache__/
+*.py[cod]
+*$py.class
+
+# Environments
+.env
+.venv
+env/
+venv/
+ENV/
+
+# Testing and coverage
+.pytest_cache/
+.coverage
+htmlcov/
+
+# Antigravity / Jetski local artifacts
+.system_generated/
+scratch/
+DEAD_ENDS.md
+RECEIPTS.md
+HANDOFF.md
+
+# OS files
+.DS_Store
+Thumbs.db
