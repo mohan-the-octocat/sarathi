@@ -14,11 +14,11 @@ from typing import Any
 MANIFEST_FILENAME = ".orchestra-installed-manifest.json"
 
 
-def resolve_global_paths() -> dict[str, pathlib.Path]:
+def resolve_global_paths(plugin_name: str = "orchestra") -> dict[str, pathlib.Path]:
   """Resolves standard global Antigravity / Jetski paths."""
   home = pathlib.Path.home()
   gemini_config = home / ".gemini" / "config"
-  plugins_dir = gemini_config / "plugins" / "orchestra"
+  plugins_dir = gemini_config / "plugins" / plugin_name
   agents_dir = gemini_config / "agents"
 
   return {
@@ -28,10 +28,10 @@ def resolve_global_paths() -> dict[str, pathlib.Path]:
   }
 
 
-def resolve_workspace_paths(workspace_dir: str) -> dict[str, pathlib.Path]:
+def resolve_workspace_paths(workspace_dir: str, plugin_name: str = "orchestra") -> dict[str, pathlib.Path]:
   """Resolves workspace-local Antigravity paths."""
   ws = pathlib.Path(workspace_dir).resolve()
-  plugins_dir = ws / ".gemini" / "plugins" / "orchestra"
+  plugins_dir = ws / ".gemini" / "plugins" / plugin_name
   agents_dir = ws / ".agents" / "agents"
 
   return {
@@ -49,19 +49,21 @@ def get_source_root() -> pathlib.Path:
 def install_plugin(
     scope: str = "global",
     project_dir: str | None = None,
+    plugin_name: str = "orchestra",
     use_symlink: bool = True,
     dry_run: bool = False,
+    force: bool = False,
 ) -> int:
   """Installs the Orchestra plugin and registers custom agents."""
   src_root = get_source_root()
   print(f"[Orchestra] Installing from: {src_root}")
 
   if scope == "global":
-    paths = resolve_global_paths()
+    paths = resolve_global_paths(plugin_name=plugin_name)
   elif scope == "workspace":
     if not project_dir:
       project_dir = os.getcwd()
-    paths = resolve_workspace_paths(project_dir)
+    paths = resolve_workspace_paths(project_dir, plugin_name=plugin_name)
   else:
     print(f"Error: Unknown scope '{scope}'. Use 'global' or 'workspace'.", file=sys.stderr)
     return 1
@@ -140,14 +142,18 @@ def install_plugin(
   return 0
 
 
-def uninstall_plugin(scope: str = "global", project_dir: str | None = None) -> int:
+def uninstall_plugin(
+    scope: str = "global",
+    project_dir: str | None = None,
+    plugin_name: str = "orchestra",
+) -> int:
   """Uninstalls previously installed Orchestra plugin and agents."""
   if scope == "global":
-    paths = resolve_global_paths()
+    paths = resolve_global_paths(plugin_name=plugin_name)
   else:
     if not project_dir:
       project_dir = os.getcwd()
-    paths = resolve_workspace_paths(project_dir)
+    paths = resolve_workspace_paths(project_dir, plugin_name=plugin_name)
 
   manifest_file = paths["plugins_dir"].parent / MANIFEST_FILENAME
   if not manifest_file.exists():
@@ -192,6 +198,11 @@ def main(argv: list[str] | None = None) -> int:
       help="Installation scope: 'global' (~/.gemini/config) or 'workspace' (.gemini).",
   )
   parser.add_argument(
+      "--plugin-name",
+      default="orchestra",
+      help="Target plugin directory name (default: 'orchestra').",
+  )
+  parser.add_argument(
       "--project-dir",
       default=None,
       help="Target project directory for workspace scope (defaults to CWD).",
@@ -207,6 +218,11 @@ def main(argv: list[str] | None = None) -> int:
       help="Simulate installation without making changes.",
   )
   parser.add_argument(
+      "--force",
+      action="store_true",
+      help="Force overwrite existing installation or symlinks.",
+  )
+  parser.add_argument(
       "--uninstall",
       action="store_true",
       help="Uninstall Orchestra plugin and agents.",
@@ -215,13 +231,19 @@ def main(argv: list[str] | None = None) -> int:
   args = parser.parse_args(argv)
 
   if args.uninstall:
-    return uninstall_plugin(scope=args.scope, project_dir=args.project_dir)
+    return uninstall_plugin(
+        scope=args.scope,
+        project_dir=args.project_dir,
+        plugin_name=args.plugin_name,
+    )
 
   return install_plugin(
       scope=args.scope,
       project_dir=args.project_dir,
+      plugin_name=args.plugin_name,
       use_symlink=not args.copy,
       dry_run=args.dry_run,
+      force=args.force,
   )
 
 
