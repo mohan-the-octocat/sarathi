@@ -3,9 +3,9 @@ requires = ["setuptools>=61.0"]
 build-backend = "setuptools.build_meta"
 
 [project]
-name = "antigravity-orchestra"
+name = "sarathi"
 version = "1.0.0"
-description = "Model-agnostic conductor plugin for Antigravity"
+description = "Sarathi: Model-agnostic conductor plugin & subagent fleet for Google Antigravity"
 readme = "README.md"
 requires-python = ">=3.9"
 license = { text = "Apache-2.0" }
@@ -15,6 +15,7 @@ authors = [
 keywords = [
     "antigravity",
     "jetski",
+    "sarathi",
     "orchestra",
     "agentic-ai",
     "conductor",
@@ -35,11 +36,11 @@ classifiers = [
 ]
 
 [project.urls]
-Homepage = "https://github.com/mohan-the-octocat/antigravity-orchestra"
-Repository = "https://github.com/mohan-the-octocat/antigravity-orchestra"
-Issues = "https://github.com/mohan-the-octocat/antigravity-orchestra/issues"
+Homepage = "https://github.com/mohan-the-octocat/sarathi"
+Repository = "https://github.com/mohan-the-octocat/sarathi"
+Issues = "https://github.com/mohan-the-octocat/sarathi/issues"
 
 [project.scripts]
-orchestra-install = "scripts.install:main"
-orchestra-detect-tampering = "scripts.detect_test_tampering:main"
-orchestra-verify-receipts = "scripts.reconcile_receipts:main"
+sarathi-install = "scripts.install:main"
+sarathi-detect-tampering = "scripts.detect_test_tampering:main"
+sarathi-verify-receipts = "scripts.reconcile_receipts:main"

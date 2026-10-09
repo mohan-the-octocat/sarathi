@@ -1,4 +1,4 @@
-"""Unit tests for the Orchestra Antigravity installer."""
+"""Unit tests for the Sarathi Antigravity installer."""
 
 import os
 import pathlib
@@ -25,7 +25,7 @@ class TestInstaller(unittest.TestCase):
 
   def test_resolve_workspace_paths(self):
     paths = resolve_workspace_paths(self.ws_dir)
-    self.assertEqual(paths["plugins_dir"], pathlib.Path(self.ws_dir) / ".gemini" / "plugins" / "orchestra")
+    self.assertEqual(paths["plugins_dir"], pathlib.Path(self.ws_dir) / ".gemini" / "plugins" / "sarathi")
     self.assertEqual(paths["agents_dir"], pathlib.Path(self.ws_dir) / ".agents" / "agents")
 
   def test_dry_run_install(self):
@@ -36,7 +36,7 @@ class TestInstaller(unittest.TestCase):
     )
     self.assertEqual(ret, 0)
     # In dry run, files should not exist
-    self.assertFalse((pathlib.Path(self.ws_dir) / ".gemini" / "plugins" / "orchestra").exists())
+    self.assertFalse((pathlib.Path(self.ws_dir) / ".gemini" / "plugins" / "sarathi").exists())
 
   def test_real_workspace_install_and_uninstall(self):
     # 1. Install
@@ -48,15 +48,15 @@ class TestInstaller(unittest.TestCase):
     self.assertEqual(ret, 0)
 
     # Verify plugin directory was created
-    plugin_target = pathlib.Path(self.ws_dir) / ".gemini" / "plugins" / "orchestra"
+    plugin_target = pathlib.Path(self.ws_dir) / ".gemini" / "plugins" / "sarathi"
     self.assertTrue(plugin_target.exists(), "Plugin target must exist")
 
     # Verify agents were installed
     agents_target = pathlib.Path(self.ws_dir) / ".agents" / "agents"
-    self.assertTrue((agents_target / "orchestra.md").exists(), "orchestra.md agent must exist in agents dir")
-    self.assertTrue((agents_target / "orchestra_worker.md").exists())
-    self.assertTrue((agents_target / "orchestra_scout.md").exists())
-    self.assertTrue((agents_target / "orchestra_redteam.md").exists())
+    self.assertTrue((agents_target / "sarathi.md").exists(), "sarathi.md agent must exist in agents dir")
+    self.assertTrue((agents_target / "sarathi_worker.md").exists())
+    self.assertTrue((agents_target / "sarathi_scout.md").exists())
+    self.assertTrue((agents_target / "sarathi_redteam.md").exists())
 
     # Verify manifest
     manifest_file = plugin_target.parent / MANIFEST_FILENAME
@@ -68,7 +68,7 @@ class TestInstaller(unittest.TestCase):
 
     # Verify cleanup
     self.assertFalse(plugin_target.exists(), "Plugin target should be removed")
-    self.assertFalse((agents_target / "orchestra.md").exists(), "Agent link should be removed")
+    self.assertFalse((agents_target / "sarathi.md").exists(), "Agent link should be removed")
     self.assertFalse(manifest_file.exists(), "Manifest should be removed")
 
 

@@ -14,12 +14,12 @@ def resolve_ledger_path() -> str:
   # Prefer workspace-local .gemini directory if present
   workspace_gemini = pathlib.Path(".gemini")
   if workspace_gemini.is_dir():
-    return str(workspace_gemini / "orchestra_telemetry.jsonl")
+    return str(workspace_gemini / "sarathi_telemetry.jsonl")
 
   # Default to user home Antigravity directory
   antigravity_dir = pathlib.Path.home() / ".gemini" / "antigravity"
   os.makedirs(antigravity_dir, exist_ok=True)
-  return str(antigravity_dir / "orchestra_telemetry.jsonl")
+  return str(antigravity_dir / "sarathi_telemetry.jsonl")
 
 
 def record_orchestration_event(

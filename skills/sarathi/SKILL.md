@@ -1,19 +1,19 @@
 ---
-name: orchestra
-description: "Model-agnostic conductor orchestration for Antigravity. Decomposes tasks into complexity tiers and coordinates subagent workers, scouts, and red teams."
+name: sarathi
+description: "Model-agnostic conductor orchestration for Antigravity, inspired by the divine charioteer. Decomposes tasks into complexity tiers and coordinates subagent workers, scouts, and red teams."
 metadata:
-  icon: 🎼
+  icon: 🪔
 ---
 
-# Orchestra Conductor Skill
+# Sarathi Conductor Skill
 
-Orchestra orchestrates engineering tasks with model-agnostic pacing across any model serving Antigravity (Gemini 1.5/2.0/3.8 Flash & Pro, Claude 3.5/3.7 Sonnet & Opus, GPT-4o, etc.).
+Sarathi orchestrates engineering tasks with model-agnostic pacing across any model serving Antigravity (Gemini 1.5/2.0/3.8 Flash & Pro, Claude 3.5/3.7 Sonnet & Opus, GPT-4o, etc.).
 
-It preserves your primary model's reasoning capacity and context window for architecture, trade-offs, and coordination, while delegating codebase search, editing, unit testing, and diff review to pinned subagents.
+Like the divine charioteer who guides the warrior with vision and strategy while abstaining from physical combat, Sarathi preserves your primary model's reasoning capacity and context window for architecture, trade-offs, and coordination, while delegating codebase search, editing, unit testing, and diff review to pinned subagents.
 
 ## When to Use
 
-Use `/orchestra` for:
+Use `/sarathi` for:
 - Non-trivial bug fixes and feature development spanning one or more files.
 - Refactoring tasks requiring careful planning, implementation, and verification.
 - Codebase explorations where reading dozens of files would pollute your chat context.
@@ -23,32 +23,32 @@ Use `/orchestra` for:
 
 ## 1. Complexity Tier Routing
 
-When you invoke `/orchestra <task description>`, the Conductor assesses the scope and routes to one of three tiers:
+When you invoke `/sarathi <task description>`, the Conductor assesses the scope and routes to one of three tiers:
 
 ### Tier 1: Surgical Edits
 - **Target**: Single-file changes, typos, trivial assertion updates.
 - **Workflow**:
-  1. Conductor dispatches a single `orchestra_worker` with the target file and test command.
+  1. Conductor dispatches a single `sarathi_worker` with the target file and test command.
   2. Worker performs the edit, executes the test suite, and outputs the structured return header.
   3. Conductor audits the diff and delivers the result. No separate planning or review pass is required.
 
 ### Tier 2: Standard Feature / Bug Fix
 - **Target**: Multi-file changes with defined boundaries, new API endpoints, refactoring.
 - **Workflow**:
-  1. **Scouting**: Conductor dispatches `orchestra_scout` to crawl candidate files and verify symbol signatures.
+  1. **Scouting**: Conductor dispatches `sarathi_scout` to crawl candidate files and verify symbol signatures.
   2. **Decision Spine**: Conductor writes a 10–15 line decision spine defining boundaries, non-goals, and files to touch.
-  3. **Implementation**: Conductor dispatches `orchestra_worker` with an explicit `ASSIGNED_FILES_EXCLUSIVE` manifest.
-  4. **Adversarial Review**: Conductor dispatches `orchestra_redteam` on the resulting diff to check for stubs, swallowed errors, and test tampering. The reviewer repairs minor defects in place and reruns tests.
+  3. **Implementation**: Conductor dispatches `sarathi_worker` with an explicit `ASSIGNED_FILES_EXCLUSIVE` manifest.
+  4. **Adversarial Review**: Conductor dispatches `sarathi_redteam` on the resulting diff to check for stubs, swallowed errors, and test tampering. The reviewer repairs minor defects in place and reruns tests.
   5. **Conductor Audit**: Conductor reviews the verified diff and receipts before presenting the completed task.
 
 ### Tier 3: Complex Architectural Refactoring
 - **Target**: High-risk migrations, cross-package interface overhauls, ambiguous designs.
 - **Workflow**:
-  1. **Deep Scouting**: Dispatch `orchestra_scout_deep` to map full dependency trees and call graphs.
+  1. **Deep Scouting**: Dispatch `sarathi_scout_deep` to map full dependency trees and call graphs.
   2. **Prototype Branches (Optional)**: Dispatch competing workers in branch workspaces (`Workspace: 'branch'`) to test alternative abstractions (e.g. minimalist vs. defensive).
   3. **Architectural Synthesis**: Conductor synthesizes findings into a unified specification.
-  4. **Heavy Implementation**: Dispatch `orchestra_worker_heavy` to implement across all assigned files.
-  5. **Deep Adversarial Review**: Dispatch `orchestra_redteam_heavy` to verify invariants and stress-test boundary failure modes.
+  4. **Heavy Implementation**: Dispatch `sarathi_worker_heavy` to implement across all assigned files.
+  5. **Deep Adversarial Review**: Dispatch `sarathi_redteam_heavy` to verify invariants and stress-test boundary failure modes.
 
 ---
 
@@ -57,7 +57,7 @@ When you invoke `/orchestra <task description>`, the Conductor assesses the scop
 When dispatching subagents via `invoke_subagent`, the Conductor uses this standardized format:
 
 ```text
-ROLE: orchestra_worker | orchestra_scout | orchestra_redteam
+ROLE: sarathi_worker | sarathi_scout | sarathi_redteam
 TASK: <Concise, explicit description of the objective>
 ASSIGNED_FILES_EXCLUSIVE:
 - <file_path_1>
@@ -83,7 +83,7 @@ To prevent infinite retry loops:
 1. If a worker encounters the exact same test failure twice, or returns `STATUS: BLOCKED`:
    - Halt worker execution immediately. Kill worker via `manage_subagents(Action='kill')`.
    - Record the failed error signature and command to `scratch/DEAD_ENDS.md`.
-   - Escalate to `orchestra_worker_heavy` with `DEAD_ENDS.md` in context, or pause to ask the user for clarification.
+   - Escalate to `sarathi_worker_heavy` with `DEAD_ENDS.md` in context, or pause to ask the user for clarification.
 
 ---
 

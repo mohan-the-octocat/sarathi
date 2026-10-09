@@ -1,8 +1,8 @@
 {
-  "name": "antigravity-orchestra",
-  "displayName": "Orchestra",
+  "name": "sarathi",
+  "displayName": "Sarathi",
   "version": "1.0.0",
-  "description": "Model-agnostic conductor plugin for Antigravity. Keeps the primary model focused on judgment, architecture, and coordination while delegating code exploration, bounded implementation, and adversarial review to subagents.",
+  "description": "Model-agnostic conductor plugin for Antigravity, inspired by the divine charioteer. Keeps the primary model focused on judgment, architecture, and coordination while delegating code exploration, bounded implementation, and adversarial review to subagents.",
   "logo": "assets/logo.svg",
   "capabilities": {
     "agents": true,
@@ -10,8 +10,8 @@
     "mcp": true
   },
   "suggestedPrompts": [
-    "/orchestra Research, plan, implement, and red-team verify: ",
-    "/orchestra-plan Create an architectural plan for: ",
-    "/orchestra-verify Audit recent changes for test tampering and receipts"
+    "/sarathi Research, plan, implement, and red-team verify: ",
+    "/sarathi-plan Create an architectural plan for: ",
+    "/sarathi-verify Audit recent changes for test tampering and receipts"
   ]
 }

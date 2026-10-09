@@ -31,25 +31,25 @@ def parse_frontmatter(content: str) -> tuple[dict[str, str], str]:
 
 class TestSkills(unittest.TestCase):
 
-  def test_orchestra_skill(self):
-    path = SKILLS_DIR / "orchestra" / "SKILL.md"
-    self.assertTrue(path.is_file(), "skills/orchestra/SKILL.md must exist")
+  def test_sarathi_skill(self):
+    path = SKILLS_DIR / "sarathi" / "SKILL.md"
+    self.assertTrue(path.is_file(), "skills/sarathi/SKILL.md must exist")
     content = path.read_text(encoding="utf-8")
     fm, body = parse_frontmatter(content)
 
-    self.assertEqual(fm.get("name"), "orchestra")
+    self.assertEqual(fm.get("name"), "sarathi")
     self.assertTrue(fm.get("description"))
     self.assertIn("Complexity Tier Routing", body)
     self.assertIn("Dispatch Template", body)
     self.assertIn("Two-Turn Circuit Breaker", body)
 
-  def test_orchestra_plan_skill(self):
-    path = SKILLS_DIR / "orchestra_plan" / "SKILL.md"
-    self.assertTrue(path.is_file(), "skills/orchestra_plan/SKILL.md must exist")
+  def test_sarathi_plan_skill(self):
+    path = SKILLS_DIR / "sarathi_plan" / "SKILL.md"
+    self.assertTrue(path.is_file(), "skills/sarathi_plan/SKILL.md must exist")
     content = path.read_text(encoding="utf-8")
     fm, body = parse_frontmatter(content)
 
-    self.assertEqual(fm.get("name"), "orchestra_plan")
+    self.assertEqual(fm.get("name"), "sarathi_plan")
     self.assertTrue(fm.get("description"))
     self.assertIn("Zero-Decision Rule", body)
     self.assertIn("Phase 1: Heilmeier Scoped Grill", body)
@@ -57,13 +57,13 @@ class TestSkills(unittest.TestCase):
     self.assertIn("Phase 3: Goldfish Split Audit", body)
     self.assertIn("Phase 4: Resolution & Implementation Handoff", body)
 
-  def test_orchestra_verify_skill(self):
-    path = SKILLS_DIR / "orchestra_verify" / "SKILL.md"
-    self.assertTrue(path.is_file(), "skills/orchestra_verify/SKILL.md must exist")
+  def test_sarathi_verify_skill(self):
+    path = SKILLS_DIR / "sarathi_verify" / "SKILL.md"
+    self.assertTrue(path.is_file(), "skills/sarathi_verify/SKILL.md must exist")
     content = path.read_text(encoding="utf-8")
     fm, body = parse_frontmatter(content)
 
-    self.assertEqual(fm.get("name"), "orchestra_verify")
+    self.assertEqual(fm.get("name"), "sarathi_verify")
     self.assertTrue(fm.get("description"))
     self.assertIn("Test Tampering Detection", body)
     self.assertIn("Receipts Reconciliation", body)

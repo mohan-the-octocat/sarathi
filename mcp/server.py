@@ -25,11 +25,11 @@ from mcp.tools.telemetry import record_orchestration_event
 
 logging.basicConfig(
     level=logging.INFO,
-    format="[%(asctime)s] [%(levelname)s] [orchestra_mcp] %(message)s",
+    format="[%(asctime)s] [%(levelname)s] [sarathi_mcp] %(message)s",
     handlers=[logging.StreamHandler(sys.stderr)],
 )
 
-SERVER_NAME = "orchestra-tools"
+SERVER_NAME = "sarathi-tools"
 SERVER_VERSION = "1.0.0"
 PROTOCOL_VERSION = "2024-11-05"
 

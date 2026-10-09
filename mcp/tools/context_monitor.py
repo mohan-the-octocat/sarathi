@@ -18,7 +18,7 @@ def resolve_handoff_threshold() -> int:
   2. Local config file ~/.gemini/antigravity/context_handoff_tokens.
   3. Default 250,000 tokens.
   """
-  env_val = os.environ.get("ORCHESTRA_CONTEXT_HANDOFF_TOKENS")
+  env_val = os.environ.get("SARATHI_CONTEXT_HANDOFF_TOKENS") or os.environ.get("ORCHESTRA_CONTEXT_HANDOFF_TOKENS")
   if env_val:
     try:
       return int(env_val.strip())

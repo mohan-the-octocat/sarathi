@@ -20,7 +20,7 @@ class TestMcpServer(unittest.TestCase):
     self.assertEqual(resp["id"], 1)
     result = resp.get("result", {})
     self.assertEqual(result.get("protocolVersion"), "2024-11-05")
-    self.assertEqual(result.get("serverInfo", {}).get("name"), "orchestra-tools")
+    self.assertEqual(result.get("serverInfo", {}).get("name"), "sarathi-tools")
 
   def test_tools_list(self):
     resp = handle_tools_list(2)

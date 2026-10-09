@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Cross-platform installer for Orchestra plugin in Antigravity."""
+"""Cross-platform installer for Sarathi plugin in Antigravity."""
 
 from __future__ import annotations
 
@@ -11,10 +11,10 @@ import shutil
 import sys
 from typing import Any
 
-MANIFEST_FILENAME = ".orchestra-installed-manifest.json"
+MANIFEST_FILENAME = ".sarathi-installed-manifest.json"
 
 
-def resolve_global_paths(plugin_name: str = "orchestra") -> dict[str, pathlib.Path]:
+def resolve_global_paths(plugin_name: str = "sarathi") -> dict[str, pathlib.Path]:
   """Resolves standard global Antigravity / Jetski paths."""
   home = pathlib.Path.home()
   gemini_config = home / ".gemini" / "config"
@@ -28,7 +28,7 @@ def resolve_global_paths(plugin_name: str = "orchestra") -> dict[str, pathlib.Pa
   }
 
 
-def resolve_workspace_paths(workspace_dir: str, plugin_name: str = "orchestra") -> dict[str, pathlib.Path]:
+def resolve_workspace_paths(workspace_dir: str, plugin_name: str = "sarathi") -> dict[str, pathlib.Path]:
   """Resolves workspace-local Antigravity paths."""
   ws = pathlib.Path(workspace_dir).resolve()
   plugins_dir = ws / ".gemini" / "plugins" / plugin_name
@@ -49,14 +49,14 @@ def get_source_root() -> pathlib.Path:
 def install_plugin(
     scope: str = "global",
     project_dir: str | None = None,
-    plugin_name: str = "orchestra",
+    plugin_name: str = "sarathi",
     use_symlink: bool = True,
     dry_run: bool = False,
     force: bool = False,
 ) -> int:
-  """Installs the Orchestra plugin and registers custom agents."""
+  """Installs the Sarathi plugin and registers custom agents."""
   src_root = get_source_root()
-  print(f"[Orchestra] Installing from: {src_root}")
+  print(f"[Sarathi] Installing from: {src_root}")
 
   if scope == "global":
     paths = resolve_global_paths(plugin_name=plugin_name)
@@ -71,11 +71,12 @@ def install_plugin(
   target_plugin_dir = paths["plugins_dir"]
   target_agents_dir = paths["agents_dir"]
 
-  print(f"[Orchestra] Target plugin location: {target_plugin_dir}")
-  print(f"[Orchestra] Target agents location: {target_agents_dir}")
+  print(f"[Sarathi] Target plugin location: {target_plugin_dir}")
+  print(f"[Sarathi] Target agents location: {target_agents_dir}")
 
   manifest: dict[str, Any] = {
       "scope": scope,
+      "plugin_name": plugin_name,
       "source_root": str(src_root),
       "installed_at": str(pathlib.Path.home()),
       "created_links": [],
@@ -112,7 +113,7 @@ def install_plugin(
   target_agents_dir.mkdir(parents=True, exist_ok=True)
   agents_src = src_root / "agents"
   if agents_src.is_dir():
-    for agent_file in agents_src.glob("*.md"):
+    for agent_file in sorted(agents_src.glob("*.md")):
       dest = target_agents_dir / agent_file.name
       if dest.exists() or dest.is_symlink():
         dest.unlink()
@@ -135,19 +136,19 @@ def install_plugin(
   with open(manifest_file, "w", encoding="utf-8") as f:
     json.dump(manifest, f, indent=2)
 
-  print("\n[SUCCESS] Orchestra successfully installed for Antigravity!")
+  print("\n[SUCCESS] Sarathi successfully installed for Antigravity!")
   print("You can now:")
-  print("  1. Select 'orchestra' from the Agent dropdown in Antigravity.")
-  print("  2. Use slash commands: /orchestra, /orchestra-plan, /orchestra-verify.")
+  print("  1. Select 'sarathi' from the Agent dropdown in Antigravity.")
+  print("  2. Use slash commands: /sarathi, /sarathi-plan, /sarathi-verify.")
   return 0
 
 
 def uninstall_plugin(
     scope: str = "global",
     project_dir: str | None = None,
-    plugin_name: str = "orchestra",
+    plugin_name: str = "sarathi",
 ) -> int:
-  """Uninstalls previously installed Orchestra plugin and agents."""
+  """Uninstalls previously installed Sarathi plugin and agents."""
   if scope == "global":
     paths = resolve_global_paths(plugin_name=plugin_name)
   else:
@@ -185,12 +186,12 @@ def uninstall_plugin(
       print(f"  - Removed directory: {copied}")
 
   manifest_file.unlink(missing_ok=True)
-  print("\n[SUCCESS] Orchestra uninstalled cleanly.")
+  print("\n[SUCCESS] Sarathi uninstalled cleanly.")
   return 0
 
 
 def main(argv: list[str] | None = None) -> int:
-  parser = argparse.ArgumentParser(description="Installer for Orchestra in Antigravity.")
+  parser = argparse.ArgumentParser(description="Installer for Sarathi in Antigravity.")
   parser.add_argument(
       "--scope",
       choices=["global", "workspace"],
@@ -199,8 +200,8 @@ def main(argv: list[str] | None = None) -> int:
   )
   parser.add_argument(
       "--plugin-name",
-      default="orchestra",
-      help="Target plugin directory name (default: 'orchestra').",
+      default="sarathi",
+      help="Target plugin directory name (default: 'sarathi').",
   )
   parser.add_argument(
       "--project-dir",
@@ -225,7 +226,7 @@ def main(argv: list[str] | None = None) -> int:
   parser.add_argument(
       "--uninstall",
       action="store_true",
-      help="Uninstall Orchestra plugin and agents.",
+      help="Uninstall Sarathi plugin and agents.",
   )
 
   args = parser.parse_args(argv)

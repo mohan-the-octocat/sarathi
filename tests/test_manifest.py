@@ -1,4 +1,4 @@
-"""Tests for Orchestra plugin.json and mcp_config.json manifests."""
+"""Tests for Sarathi plugin.json and mcp_config.json manifests."""
 
 import json
 import pathlib
@@ -16,8 +16,8 @@ class TestManifests(unittest.TestCase):
     with open(plugin_path, "r", encoding="utf-8") as f:
       manifest = json.load(f)
 
-    self.assertEqual(manifest.get("name"), "antigravity-orchestra")
-    self.assertEqual(manifest.get("displayName"), "Orchestra")
+    self.assertEqual(manifest.get("name"), "sarathi")
+    self.assertEqual(manifest.get("displayName"), "Sarathi")
     self.assertTrue(manifest.get("version"), "Must have a version")
     self.assertIn("capabilities", manifest)
     self.assertTrue(manifest["capabilities"].get("agents"))
@@ -32,8 +32,8 @@ class TestManifests(unittest.TestCase):
       config = json.load(f)
 
     self.assertIn("mcpServers", config)
-    self.assertIn("orchestra-tools", config["mcpServers"])
-    server_conf = config["mcpServers"]["orchestra-tools"]
+    self.assertIn("sarathi-tools", config["mcpServers"])
+    server_conf = config["mcpServers"]["sarathi-tools"]
 
     self.assertEqual(server_conf.get("command"), "python3")
     self.assertIn("args", server_conf)

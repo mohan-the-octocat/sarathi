@@ -33,30 +33,30 @@ class TestAgents(unittest.TestCase):
 
   def test_all_expected_agents_exist(self):
     expected_agents = [
-        "orchestra.md",
-        "orchestra_scout.md",
-        "orchestra_scout_deep.md",
-        "orchestra_worker.md",
-        "orchestra_worker_heavy.md",
-        "orchestra_redteam.md",
-        "orchestra_redteam_heavy.md",
+        "sarathi.md",
+        "sarathi_scout.md",
+        "sarathi_scout_deep.md",
+        "sarathi_worker.md",
+        "sarathi_worker_heavy.md",
+        "sarathi_redteam.md",
+        "sarathi_redteam_heavy.md",
     ]
     for agent_name in expected_agents:
       agent_path = AGENTS_DIR / agent_name
       self.assertTrue(agent_path.is_file(), f"Agent file missing: {agent_name}")
 
   def test_main_conductor_agent(self):
-    path = AGENTS_DIR / "orchestra.md"
+    path = AGENTS_DIR / "sarathi.md"
     content = path.read_text(encoding="utf-8")
     frontmatter, body = parse_frontmatter(content)
 
-    self.assertEqual(frontmatter.get("name"), "orchestra")
+    self.assertEqual(frontmatter.get("name"), "sarathi")
     self.assertTrue(frontmatter.get("description"))
     self.assertEqual(frontmatter.get("mainAgent"), "true")
     self.assertEqual(frontmatter.get("subagent"), "true")
 
     # Body must have H1 headings for prompt sections
-    self.assertIn("# Orchestra Conductor", body)
+    self.assertIn("# Sarathi Conductor", body)
     self.assertIn("# Execution Tiers", body)
     self.assertIn("# Subagent Fleet & Delegation Protocol", body)
     self.assertIn("# Return Header & Verification Contract", body)
@@ -64,12 +64,12 @@ class TestAgents(unittest.TestCase):
 
   def test_subagent_roles_and_models(self):
     subagents = {
-        "orchestra_scout.md": ("flash", "false", "true"),
-        "orchestra_scout_deep.md": ("pro", "false", "true"),
-        "orchestra_worker.md": ("flash", "false", "true"),
-        "orchestra_worker_heavy.md": ("pro", "false", "true"),
-        "orchestra_redteam.md": ("flash", "false", "true"),
-        "orchestra_redteam_heavy.md": ("pro", "false", "true"),
+        "sarathi_scout.md": ("flash", "false", "true"),
+        "sarathi_scout_deep.md": ("pro", "false", "true"),
+        "sarathi_worker.md": ("flash", "false", "true"),
+        "sarathi_worker_heavy.md": ("pro", "false", "true"),
+        "sarathi_redteam.md": ("flash", "false", "true"),
+        "sarathi_redteam_heavy.md": ("pro", "false", "true"),
     }
     for filename, (model, main_agent, subagent) in subagents.items():
       path = AGENTS_DIR / filename
