@@ -27,7 +27,7 @@
   <!-- Background Card -->
   <rect width="512" height="512" rx="110" fill="url(#bg-grad)" />
 
-  <!-- Harmonic Orchestration Waveform Rings -->
+  <!-- Harmonic Charioteer Waveform Rings -->
   <circle cx="256" cy="256" r="190" fill="none" stroke="url(#arc-grad-1)" stroke-width="2" stroke-dasharray="8 12" />
   <circle cx="256" cy="256" r="145" fill="none" stroke="url(#arc-grad-2)" stroke-width="3" stroke-dasharray="14 10" />
   <circle cx="256" cy="256" r="100" fill="none" stroke="#a855f7" stroke-width="2" opacity="0.4" />

@@ -1,1 +1,1 @@
-"""Tests for Orchestra plugin for Antigravity."""
+"""Tests for Sarathi plugin for Antigravity."""

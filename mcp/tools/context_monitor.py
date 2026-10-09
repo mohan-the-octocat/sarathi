@@ -1,4 +1,4 @@
-"""Context size and subagent handoff threshold monitor for Orchestra."""
+"""Context size and subagent handoff threshold monitor for Sarathi."""
 
 from __future__ import annotations
 
@@ -14,11 +14,11 @@ def resolve_handoff_threshold() -> int:
   """Resolves the active context handoff token threshold.
 
   Precedence:
-  1. Environment variable ORCHESTRA_CONTEXT_HANDOFF_TOKENS.
+  1. Environment variable SARATHI_CONTEXT_HANDOFF_TOKENS.
   2. Local config file ~/.gemini/antigravity/context_handoff_tokens.
   3. Default 250,000 tokens.
   """
-  env_val = os.environ.get("SARATHI_CONTEXT_HANDOFF_TOKENS") or os.environ.get("ORCHESTRA_CONTEXT_HANDOFF_TOKENS")
+  env_val = os.environ.get("SARATHI_CONTEXT_HANDOFF_TOKENS")
   if env_val:
     try:
       return int(env_val.strip())

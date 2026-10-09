@@ -30,8 +30,8 @@ class TestMcpServer(unittest.TestCase):
 
     self.assertIn("detect_test_tampering", tool_names)
     self.assertIn("verify_receipts", tool_names)
-    self.assertIn("get_orchestration_status", tool_names)
-    self.assertIn("record_orchestration_event", tool_names)
+    self.assertIn("get_sarathi_status", tool_names)
+    self.assertIn("record_sarathi_event", tool_names)
 
   def test_tool_call_verify_receipts(self):
     with tempfile.TemporaryDirectory() as tmpdir:
@@ -52,9 +52,9 @@ class TestMcpServer(unittest.TestCase):
       parsed = json.loads(content)
       self.assertTrue(parsed["passed"])
 
-  def test_tool_call_get_orchestration_status(self):
+  def test_tool_call_get_sarathi_status(self):
     resp = handle_tools_call(4, {
-        "name": "get_orchestration_status",
+        "name": "get_sarathi_status",
         "arguments": {
             "conversation_id": "test-conv-123",
             "context_tokens": 50000,
@@ -66,9 +66,9 @@ class TestMcpServer(unittest.TestCase):
     self.assertEqual(parsed["recommendation"], "continue")
     self.assertEqual(parsed["context_tokens"], 50000)
 
-  def test_tool_call_record_orchestration_event(self):
+  def test_tool_call_record_sarathi_event(self):
     resp = handle_tools_call(5, {
-        "name": "record_orchestration_event",
+        "name": "record_sarathi_event",
         "arguments": {
             "task_tier": "tier_1_surgical",
             "verification_outcome": "PASSED",

@@ -1,13 +1,13 @@
 ---
 name: sarathi
-description: "Model-agnostic conductor orchestration for Antigravity, inspired by the divine charioteer. Decomposes tasks into complexity tiers and coordinates subagent workers, scouts, and red teams."
+description: "Model-agnostic conductor coordination for Antigravity, inspired by the divine charioteer. Decomposes tasks into complexity tiers and coordinates subagent workers, scouts, and red teams."
 metadata:
   icon: 🪔
 ---
 
 # Sarathi Conductor Skill
 
-Sarathi orchestrates engineering tasks with model-agnostic pacing across any model serving Antigravity (Gemini 1.5/2.0/3.8 Flash & Pro, Claude 3.5/3.7 Sonnet & Opus, GPT-4o, etc.).
+Sarathi coordinates engineering tasks with model-agnostic pacing across any model serving Antigravity (Gemini 1.5/2.0/3.8 Flash & Pro, Claude 3.5/3.7 Sonnet & Opus, GPT-4o, etc.).
 
 Like the divine charioteer who guides the warrior with vision and strategy while abstaining from physical combat, Sarathi preserves your primary model's reasoning capacity and context window for architecture, trade-offs, and coordination, while delegating codebase search, editing, unit testing, and diff review to pinned subagents.
 

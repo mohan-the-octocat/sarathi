@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Standard stdio Model Context Protocol (MCP) server for Orchestra in Antigravity.
+"""Standard stdio Model Context Protocol (MCP) server for Sarathi in Antigravity.
 
 Provides developer tools for verification, test tampering detection, receipts audit,
 and local telemetry logging.
@@ -21,7 +21,7 @@ if PROJECT_ROOT not in sys.path:
 from mcp.tools.test_tampering import detect_test_tampering
 from mcp.tools.receipts_verifier import verify_receipts
 from mcp.tools.context_monitor import get_context_status
-from mcp.tools.telemetry import record_orchestration_event
+from mcp.tools.telemetry import record_sarathi_event
 
 logging.basicConfig(
     level=logging.INFO,
@@ -73,7 +73,7 @@ TOOLS = [
         },
     },
     {
-        "name": "get_orchestration_status",
+        "name": "get_sarathi_status",
         "description": (
             "Evaluates active context token size against the subagent handoff threshold "
             "(default: 250,000 tokens) and returns a recommendation (continue, warning, or handoff)."
@@ -93,9 +93,9 @@ TOOLS = [
         },
     },
     {
-        "name": "record_orchestration_event",
+        "name": "record_sarathi_event",
         "description": (
-            "Appends an orchestration milestone event to the local JSONL telemetry ledger "
+            "Appends a milestone event to the local JSONL telemetry ledger "
             "with zero external dependencies."
         ),
         "inputSchema": {
@@ -204,13 +204,13 @@ def handle_tools_call(req_id: Any, params: dict[str, Any]) -> dict[str, Any]:
       result = verify_receipts(
           receipt_path=args.get("receipt_path", ""),
       )
-    elif name == "get_orchestration_status":
+    elif name == "get_sarathi_status":
       result = get_context_status(
           conversation_id=args.get("conversation_id"),
           context_tokens=args.get("context_tokens"),
       )
-    elif name == "record_orchestration_event":
-      result = record_orchestration_event(
+    elif name == "record_sarathi_event":
+      result = record_sarathi_event(
           task_tier=args.get("task_tier", "tier_2_standard"),
           verification_outcome=args.get("verification_outcome", "NOT_APPLICABLE"),
           conductor_model=args.get("conductor_model", "auto"),

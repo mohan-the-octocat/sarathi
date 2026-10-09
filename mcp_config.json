@@ -8,8 +8,8 @@
       "enabledTools": [
         "detect_test_tampering",
         "verify_receipts",
-        "get_orchestration_status",
-        "record_orchestration_event"
+        "get_sarathi_status",
+        "record_sarathi_event"
       ],
       "tools": {
         "detect_test_tampering": {
@@ -18,10 +18,10 @@
         "verify_receipts": {
           "eager": true
         },
-        "get_orchestration_status": {
+        "get_sarathi_status": {
           "eager": true
         },
-        "record_orchestration_event": {
+        "record_sarathi_event": {
           "eager": true
         }
       }

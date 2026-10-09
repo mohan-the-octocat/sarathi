@@ -1,4 +1,4 @@
-"""Local telemetry ledger for Orchestra runs in Antigravity."""
+"""Local telemetry ledger for Sarathi runs in Antigravity."""
 
 from __future__ import annotations
 
@@ -10,7 +10,7 @@ from typing import Any
 
 
 def resolve_ledger_path() -> str:
-  """Resolves the destination path for local orchestration telemetry."""
+  """Resolves the destination path for local Sarathi telemetry."""
   # Prefer workspace-local .gemini directory if present
   workspace_gemini = pathlib.Path(".gemini")
   if workspace_gemini.is_dir():
@@ -22,7 +22,7 @@ def resolve_ledger_path() -> str:
   return str(antigravity_dir / "sarathi_telemetry.jsonl")
 
 
-def record_orchestration_event(
+def record_sarathi_event(
     task_tier: str,
     verification_outcome: str,
     conductor_model: str = "auto",
@@ -33,7 +33,7 @@ def record_orchestration_event(
     details: str = "",
     session_id: str = "",
 ) -> dict[str, Any]:
-  """Appends an orchestration milestone event to the local JSONL ledger.
+  """Appends a Sarathi milestone event to the local JSONL ledger.
 
   Args:
     task_tier: Complexity routing tier (tier_1_surgical, tier_2_standard, tier_3_architectural, research).

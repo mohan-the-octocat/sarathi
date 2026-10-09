@@ -71,7 +71,7 @@ flowchart TD
         RedTeamHeavy --> MCP
         MCP --> TamperCheck[detect_test_tampering]
         MCP --> ReceiptCheck[verify_receipts]
-        MCP --> Telemetry[record_orchestration_event]
+        MCP --> Telemetry[record_sarathi_event]
     end
 
     VerificationEngine -->|Audited Solution| Conductor
@@ -185,7 +185,7 @@ python3 scripts/detect_test_tampering.py --workspace-dir .
 
 | Command | Skill | Description |
 | :--- | :--- | :--- |
-| `/sarathi <task>` | `sarathi` | Run the main conductor orchestration on any task. |
+| `/sarathi <task>` | `sarathi` | Run the main conductor workflow on any task. |
 | `/sarathi-plan <task>` | `sarathi_plan` | Execute the 4-phase architectural planning protocol. |
 | `/sarathi-verify` | `sarathi_verify` | Audit the current workspace for test tampering and receipts. |
 
@@ -220,7 +220,7 @@ To install Sarathi exclusively for a single project/repository:
 
 1. Restart or reload your Antigravity environment.
 2. Open the **Agent dropdown picker** in Antigravity: `sarathi` will be visible and selectable.
-3. Select `sarathi` or type `/sarathi` in the chat prompt to start an orchestrated workflow.
+3. Select `sarathi` or type `/sarathi` in the chat prompt to start a conductor workflow.
 
 To uninstall cleanly at any time:
 ```bash
@@ -235,8 +235,8 @@ Sarathi bundles a native stdio MCP server (`mcp_config.json`). It exposes four t
 
 - `detect_test_tampering`: Audits git diffs for modified or deleted assertions.
 - `verify_receipts`: Reconciles test command output and exit codes.
-- `get_orchestration_status`: Evaluates context token usage against the 250,000-token handoff threshold.
-- `record_orchestration_event`: Appends milestone events to `~/.gemini/antigravity/sarathi_telemetry.jsonl`.
+- `get_sarathi_status`: Evaluates context token usage against the 250,000-token handoff threshold.
+- `record_sarathi_event`: Appends milestone events to `~/.gemini/antigravity/sarathi_telemetry.jsonl`.
 
 ---
 

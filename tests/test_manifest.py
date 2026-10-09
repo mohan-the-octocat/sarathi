@@ -43,8 +43,8 @@ class TestManifests(unittest.TestCase):
     expected_tools = [
         "detect_test_tampering",
         "verify_receipts",
-        "get_orchestration_status",
-        "record_orchestration_event",
+        "get_sarathi_status",
+        "record_sarathi_event",
     ]
     for tool in expected_tools:
       self.assertIn(tool, enabled_tools)

@@ -46,7 +46,7 @@ class TestReceiptsVerifier(unittest.TestCase):
     self.assertEqual(result["exit_code"], 1)
 
   def test_nonexistent_receipt_file(self):
-    result = verify_receipts("/tmp/nonexistent_orchestra_receipt_xyz.txt")
+    result = verify_receipts("/tmp/nonexistent_sarathi_receipt_xyz.txt")
     self.assertFalse(result["valid"])
     self.assertFalse(result["passed"])
     self.assertTrue(any("does not exist" in e for e in result["errors"]))
